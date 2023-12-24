@@ -12,4 +12,10 @@ public class UserLogin {
     private String userEmail;
     private String password;
 
+    @Override
+    public String toString() {
+        return "UserLogin{" +
+                "userEmail='" + userEmail +
+                '}';
+    }
 }

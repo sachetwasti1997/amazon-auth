@@ -1,9 +1,10 @@
 package com.sachet.authserveramazonjava.service;
 
-import com.sachet.authserveramazonjava.model.Address;
 import com.sachet.authserveramazonjava.model.User;
 import com.sachet.authserveramazonjava.model.UserLogin;
 import com.sachet.authserveramazonjava.repository.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +12,7 @@ import java.util.Optional;
 
 @Service
 public class UserService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserService.class);
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final JwtService jwtService;
@@ -33,11 +35,12 @@ public class UserService {
     }
 
     public String login(UserLogin login) throws Exception {
+        LOGGER.info("login() received a request "+login);
         Optional<User> savedUser = userRepository.findByEmail(login.getUserEmail());
         if (savedUser.isPresent()) {
             User user = savedUser.get();
             if (!bCryptPasswordEncoder.matches(login.getPassword(), user.getPassword())){
-               throw new Exception("Invalid Credentials");
+               throw new Exception("Invalid Credentials Password");
             }
             return jwtService.generateToken(user);
         }
