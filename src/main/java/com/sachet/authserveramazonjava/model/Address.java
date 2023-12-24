@@ -1,5 +1,6 @@
 package com.sachet.authserveramazonjava.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,10 +15,24 @@ public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(name = "line_one")
     private String lineOne;
+    @Column(name = "line_two")
     private String lineTwo;
+    @Column(name = "postal_code")
     private int postalCode;
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "id=" + id +
+                ", lineOne='" + lineOne + '\'' +
+                ", lineTwo='" + lineTwo + '\'' +
+                ", postalCode=" + postalCode +
+                '}';
+    }
 }

@@ -20,7 +20,8 @@ public class AddressController {
 
     @PostMapping("/add/{userId}")
     public ResponseEntity<Address> addUserAddress(@RequestBody Address address, @PathVariable Integer userId) throws Exception {
-        return ResponseEntity.ok(userService.addAddress(address, userId));
+        System.out.println(address);
+        return ResponseEntity.ok(addressService.addAddress(address, userId));
     }
 
     @PutMapping("/edit")

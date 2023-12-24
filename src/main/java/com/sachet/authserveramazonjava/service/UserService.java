@@ -48,14 +48,4 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public Address addAddress(Address address, Integer userId) throws Exception {
-        Optional<User> savedUser = userRepository.findById(userId);
-        if (savedUser.isPresent()) {
-            User user = savedUser.get();
-            user.getAddresses().add(address);
-            userRepository.save(user);
-            return address;
-        }
-        throw new Exception("No User found!");
-    }
 }
