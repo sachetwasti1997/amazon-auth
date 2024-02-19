@@ -15,4 +15,3 @@ spring:
 
 
 SECURE_KEY: ${SECURE_KEY_STR:8Xc5HXT4fRYeGL5uLyNgaGg4vtMldmLhjtIvD2gLoK4=}
-bucket_name: ${BUCKET_NAME:""}
