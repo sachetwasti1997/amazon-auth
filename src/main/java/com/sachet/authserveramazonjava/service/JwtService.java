@@ -29,10 +29,27 @@ public class JwtService {
         var key = Keys.hmacShaKeyFor(SECURE_KEY.getBytes());
         return Jwts.builder()
                 .setClaims(claims)
-                .setSubject(user.getEmail())
+                .setSubject(user.getEmail()+"|"+user.getId())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 10 * 60 * 60 * 1000))
+                .setExpiration(new Date(System.currentTimeMillis() +  60 * 60 * 1000))
                 .signWith(key)
                 .compact();
+    }
+
+    public String extractUserName(String token) {
+        return extractAllClaims(token).getSubject();
+    }
+
+    private Date extractExpirationDate(String token) {
+        return extractAllClaims(token).getExpiration();
+    }
+
+    private Claims extractAllClaims(String token) {
+        var keys = Keys.hmacShaKeyFor(SECURE_KEY.getBytes());
+        return Jwts.parserBuilder()
+                .setSigningKey(keys)
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
     }
 }

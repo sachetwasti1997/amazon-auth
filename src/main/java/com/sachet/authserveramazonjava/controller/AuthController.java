@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/v1/user")
 public class AuthController {
 
@@ -17,6 +18,15 @@ public class AuthController {
 
     public AuthController(UserService userService) {
         this.userService = userService;
+    }
+
+    @GetMapping("/profile")
+    public ResponseEntity<User> getUser(@RequestHeader("Authorization")String token)
+    throws Exception{
+        String bearer = "bearer ";
+        token = token.substring(bearer.length()-1);
+        User user = userService.getUser(token);
+        return ResponseEntity.ok(user);
     }
 
     @PostMapping("/signup")
@@ -30,8 +40,8 @@ public class AuthController {
         return ResponseEntity.ok(userService.login(login));
     }
 
-    @PutMapping("/edit")
-    public ResponseEntity<User> edit(@RequestBody User user) {
-        return ResponseEntity.ok(userService.editUser(user));
+    @PutMapping("/edit/{password}")
+    public ResponseEntity<User> edit(@RequestBody User user, @PathVariable String password) {
+        return ResponseEntity.ok(userService.editUser(user, password));
     }
 }

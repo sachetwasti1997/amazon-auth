@@ -25,6 +25,17 @@ public class UserService {
         this.jwtService = jwtService;
     }
 
+    public User getUser(String token) throws Exception {
+        String buffer = jwtService.extractUserName(token);
+        String[] userIdentifiers = buffer.split("\\|");
+        Optional<User> user =
+                userRepository.findById(Integer.parseInt(userIdentifiers[1]));
+        if (user.isEmpty()) {
+            throw new Exception("No User Found Invalid Token");
+        }
+        return user.get();
+    }
+
     public String saveUser(User user) throws Exception {
         Optional<User> existingUser = userRepository.findByEmail(user.getEmail());
         if (existingUser.isEmpty()) {
@@ -47,7 +58,12 @@ public class UserService {
         throw new Exception("Invalid Credentials");
     }
 
-    public User editUser(User user) {
+    public User editUser(User user, String password) {
+        //adding comment to restart
+        LOGGER.info("Changing the user, {}, password, {}", user, password);
+        if (password.equals("YES")){
+            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        }
         return userRepository.save(user);
     }
 

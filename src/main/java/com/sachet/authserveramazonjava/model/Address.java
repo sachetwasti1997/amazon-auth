@@ -25,6 +25,8 @@ public class Address {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+    @Column(name = "primary_address")
+    private String primaryAddress;
 
     @Override
     public String toString() {

@@ -38,4 +38,13 @@ public class AddressService {
         }
         throw new Exception("No User found!");
     }
+
+    public int delete(int addressId) throws Exception {
+        Optional<Address> addressOptional = addressRepository.findById(addressId);
+        if (addressOptional.isEmpty()) {
+            throw new Exception("Cannot find the address requested");
+        }
+        addressRepository.deleteById(addressId);
+        return addressId;
+    }
 }

@@ -28,4 +28,9 @@ public class AddressController {
     public ResponseEntity<Address> editUserAddress(@RequestBody Address address) throws Exception {
         return ResponseEntity.ok(addressService.editAddress(address));
     }
+
+    @DeleteMapping("/{addressId}")
+    public ResponseEntity<Integer> deleteAddress(@PathVariable int addressId) throws Exception {
+        return ResponseEntity.ok(addressService.delete(addressId));
+    }
 }
