@@ -1,6 +1,6 @@
 package com.sachet.authserveramazonjava.controller;
 
-import com.sachet.authserveramazonjava.model.User;
+import com.sachet.authserveramazonjava.model.write.User;
 import com.sachet.authserveramazonjava.model.UserLogin;
 import com.sachet.authserveramazonjava.service.UserService;
 import org.slf4j.Logger;

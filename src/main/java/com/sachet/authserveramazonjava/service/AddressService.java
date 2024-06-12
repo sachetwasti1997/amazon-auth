@@ -1,9 +1,10 @@
 package com.sachet.authserveramazonjava.service;
 
-import com.sachet.authserveramazonjava.model.Address;
-import com.sachet.authserveramazonjava.model.User;
-import com.sachet.authserveramazonjava.repository.AddressRepository;
-import com.sachet.authserveramazonjava.repository.UserRepository;
+import com.sachet.authserveramazonjava.model.write.Address;
+import com.sachet.authserveramazonjava.model.write.User;
+import com.sachet.authserveramazonjava.repository.read.UserReadRepo;
+import com.sachet.authserveramazonjava.repository.write.AddressRepository;
+import com.sachet.authserveramazonjava.repository.write.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -12,12 +13,12 @@ import java.util.Optional;
 public class AddressService {
 
     private final AddressRepository addressRepository;
-    private final UserRepository userRepository;
+    private final UserReadRepo userReadRepo;
 
     public AddressService(AddressRepository addressRepository,
-                          UserRepository userRepository) {
+                          UserReadRepo userReadRepo) {
         this.addressRepository = addressRepository;
-        this.userRepository = userRepository;
+        this.userReadRepo = userReadRepo;
     }
 
     public Address editAddress(Address address) throws Exception {
@@ -30,7 +31,7 @@ public class AddressService {
     }
 
     public Address addAddress(Address address, Integer userId) throws Exception {
-        Optional<User> savedUser = userRepository.findById(userId);
+        Optional<User> savedUser = userReadRepo.findById(userId);
         if (savedUser.isPresent()) {
             User user = savedUser.get();
             address.setUser(user);

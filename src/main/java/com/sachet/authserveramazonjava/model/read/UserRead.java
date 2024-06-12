@@ -1,7 +1,10 @@
-package com.sachet.authserveramazonjava.model;
+package com.sachet.authserveramazonjava.model.read;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.util.List;
 
@@ -11,7 +14,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-public class User {
+public class UserRead {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -23,5 +26,5 @@ public class User {
     private String countryCode;
     private String phone;
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch = FetchType.EAGER, mappedBy = "user")
-    private List<Address> addresses;
+    private List<AddressRead> addresses;
 }

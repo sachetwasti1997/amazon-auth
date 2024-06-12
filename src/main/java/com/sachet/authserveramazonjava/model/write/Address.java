@@ -1,4 +1,4 @@
-package com.sachet.authserveramazonjava.model;
+package com.sachet.authserveramazonjava.model.write;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;

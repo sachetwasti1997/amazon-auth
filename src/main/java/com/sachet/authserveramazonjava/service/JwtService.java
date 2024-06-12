@@ -1,6 +1,6 @@
 package com.sachet.authserveramazonjava.service;
 
-import com.sachet.authserveramazonjava.model.User;
+import com.sachet.authserveramazonjava.model.write.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;

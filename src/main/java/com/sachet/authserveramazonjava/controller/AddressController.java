@@ -1,6 +1,6 @@
 package com.sachet.authserveramazonjava.controller;
 
-import com.sachet.authserveramazonjava.model.Address;
+import com.sachet.authserveramazonjava.model.write.Address;
 import com.sachet.authserveramazonjava.service.AddressService;
 import com.sachet.authserveramazonjava.service.UserService;
 import org.springframework.http.ResponseEntity;
